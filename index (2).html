@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biruk Girma — Software Developer &amp; IT Support Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B1622;
+    --bg-panel: #0F1D2C;
+    --grid-line: rgba(111,211,199,0.07);
+    --border: #1E3346;
+    --border-bright: #2B4A63;
+    --text: #E7ECF2;
+    --text-muted: #8CA0B3;
+    --text-dim: #56697C;
+    --amber: #F2A65A;
+    --cyan: #6FD3C7;
+    --alert: #E8635A;
+    --font-display: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --max: 1080px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    color: var(--text);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  a{ color: inherit; }
+  ::selection{ background: var(--cyan); color: #05100F; }
+
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+  }
+
+  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+
+  .panel{
+    position: relative;
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+  }
+  .panel .tick-tl, .panel .tick-tr, .panel .tick-bl, .panel .tick-br{
+    content:"";
+    position: absolute;
+    width: 10px; height: 10px;
+    border-color: var(--border-bright);
+    border-style: solid;
+  }
+  .panel .tick-tl{ top:-1px; left:-1px; border-width: 2px 0 0 2px; }
+  .panel .tick-tr{ top:-1px; right:-1px; border-width: 2px 2px 0 0; }
+  .panel .tick-bl{ bottom:-1px; left:-1px; border-width: 0 0 2px 2px; }
+  .panel .tick-br{ bottom:-1px; right:-1px; border-width: 0 2px 2px 0; }
+
+  /* ---------- nav ---------- */
+  header{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(11,22,34,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content: space-between;
+    padding: 16px 28px;
+    max-width: var(--max); margin: 0 auto;
+  }
+  .nav-id{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text);
+    display:flex; align-items:center; gap:10px;
+  }
+  .dot{
+    width:8px; height:8px; border-radius:50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+    animation: blink 2.4s ease-in-out infinite;
+  }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+  .nav-links{ display:flex; gap: 28px; font-family: var(--font-mono); font-size: 13px; }
+  .nav-links a{ text-decoration:none; color: var(--text-muted); transition: color .15s; }
+  .nav-links a:hover{ color: var(--cyan); }
+
+  .nav-toggle{ display:none; background:none; border:1px solid var(--border-bright); color:var(--text); font-family:var(--font-mono); font-size:12px; padding:8px 12px; cursor:pointer; }
+
+  @media (max-width: 720px){
+    .nav-links{ display:none; }
+    .nav-toggle{ display:block; }
+    .nav-links.open{
+      display:flex; flex-direction:column; gap:0;
+      position:absolute; top:100%; left:0; right:0;
+      background: var(--bg-panel); border-bottom: 1px solid var(--border);
+      padding: 8px 28px 16px;
+    }
+    .nav-links.open a{ padding: 10px 0; border-bottom: 1px solid var(--border); }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding: 80px 0 64px;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+    border-top: none;
+  }
+  @media (max-width: 860px){ .hero{ grid-template-columns: 1fr; padding: 48px 0 40px; } .hero{ text-align:left; } .hero-photo-wrap{ order:-1; max-width: 220px; margin: 0 0 8px; } }
+
+  .eyebrow-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family: var(--font-mono); font-size: 12px; color: var(--amber);
+    border: 1px solid rgba(242,166,90,0.35);
+    background: rgba(242,166,90,0.06);
+    padding: 5px 10px;
+    margin-bottom: 22px;
+  }
+
+  h1{
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+  h1 .surname{ color: var(--cyan); }
+
+  .hero-role{
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 22px;
+  }
+  .hero-desc{
+    font-size: 16.5px;
+    color: var(--text-muted);
+    max-width: 50ch;
+    margin-bottom: 28px;
+  }
+
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap: 18px;
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--text-dim);
+    margin-bottom: 30px;
+  }
+  .hero-meta span{ display:flex; align-items:center; gap:6px; }
+
+  .btn-row{ display:flex; gap: 14px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 13px 20px;
+    border: 1px solid var(--border-bright);
+    text-decoration: none;
+    display:inline-block;
+    transition: border-color .15s, background .15s;
+  }
+  .btn-primary{ background: var(--cyan); color: #05201C; border-color: var(--cyan); font-weight: 600; }
+  .btn-primary:hover{ background: #86e0d5; }
+  .btn-secondary{ color: var(--text); }
+  .btn-secondary:hover{ border-color: var(--cyan); color: var(--cyan); }
+
+  .hero-photo-wrap{ max-width: 340px; margin: 0 auto; opacity:0; animation: fadein .7s ease forwards; animation-delay: .15s; }
+  .hero-photo{ position: relative; padding: 10px; }
+  .hero-photo img{
+    display:block; width:100%; aspect-ratio: 1/1; object-fit: cover;
+    filter: grayscale(1) contrast(1.08) brightness(0.92);
+  }
+  .hero-photo-tag{
+    position:absolute; bottom: -1px; left: -1px;
+    background: var(--bg-panel); border: 1px solid var(--border-bright); border-left:none; border-bottom:none;
+    font-family: var(--font-mono); font-size: 11px; color: var(--cyan);
+    padding: 5px 10px;
+  }
+  @keyframes fadein{ to{ opacity:1; } }
+
+  /* ---------- section scaffolding ---------- */
+  section{ padding: 60px 0; border-top: 1px solid var(--border); }
+  .section-head{
+    display:flex; align-items:baseline; gap: 14px;
+    margin-bottom: 34px;
+  }
+  .section-tag{
+    font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);
+  }
+  h2{ font-size: 1.55rem; font-weight: 700; }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid; grid-template-columns: 1.3fr 1fr; gap: 40px;
+  }
+  @media (max-width: 780px){ .about-grid{ grid-template-columns: 1fr; } }
+  .about-text p{ color: var(--text-muted); margin-bottom: 16px; max-width: 62ch; }
+  .about-text strong{ color: var(--text); font-weight: 600; }
+
+  .quote-panel{ padding: 22px; margin-top: 4px; }
+  .quote-panel p{ color: var(--text-muted); font-style: italic; font-size: 14.5px; margin-bottom: 10px; }
+  .quote-attr{ font-family: var(--font-mono); font-size: 12px; color: var(--cyan); }
+
+  .stat-panel{ padding: 18px 20px; }
+  .stat-panel + .stat-panel{ margin-top: 14px; }
+  .stat-num{ font-family: var(--font-mono); font-size: 26px; color: var(--cyan); }
+  .stat-label{ font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+  /* ---------- skills ---------- */
+  .domain-grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 860px){ .domain-grid{ grid-template-columns: 1fr; } }
+  .domain{ padding: 24px; }
+  .domain-title{
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--cyan);
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .domain.mobile .domain-title{ color: var(--amber); }
+  .domain.itops .domain-title{ color: var(--alert); }
+
+  .skill-row{ margin-bottom: 14px; }
+  .skill-row:last-child{ margin-bottom: 0; }
+  .skill-row-top{ display:flex; justify-content:space-between; font-size: 13.5px; margin-bottom: 6px; }
+  .skill-row-top span:last-child{ color: var(--text-dim); font-family: var(--font-mono); font-size: 11px; }
+  .meter{ height: 4px; background: var(--border); position: relative; }
+  .meter-fill{ position:absolute; inset:0; background: var(--cyan); width: var(--w, 70%); }
+  .domain.mobile .meter-fill{ background: var(--amber); }
+  .domain.itops .meter-fill{ background: var(--alert); }
+
+  .tools-row{ margin-top: 30px; }
+  .tools-label{ font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); margin-bottom: 12px; }
+  .tool-tags{ display:flex; flex-wrap:wrap; gap: 8px; }
+  .tool-tag{ font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); border: 1px solid var(--border-bright); padding: 5px 10px; }
+
+  /* ---------- projects ---------- */
+  .project{ border: 1px solid var(--border); border-top: none; }
+  .project:first-child{ border-top: 1px solid var(--border); }
+  .project summary{
+    list-style: none; cursor: pointer;
+    padding: 20px 22px;
+    display:flex; align-items:center; gap: 18px; font-weight: 600;
+  }
+  .project summary::-webkit-details-marker{ display:none; }
+  .project-id{ font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
+  .project-name{ flex: 1; }
+  .project-arrow{ font-family: var(--font-mono); color: var(--text-dim); transition: transform .2s; }
+  .project[open] .project-arrow{ transform: rotate(90deg); color: var(--cyan); }
+  .project-body{ padding: 0 22px 24px 22px; }
+  .project-body ul{ color: var(--text-muted); max-width: 68ch; margin: 0 0 14px 18px; }
+  .project-body li{ margin-bottom: 6px; }
+  .stack-row{ display:flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .stack-tag{ font-family: var(--font-mono); font-size: 11px; border: 1px solid var(--border-bright); color: var(--text-muted); padding: 4px 9px; }
+  .project-links a{ font-family: var(--font-mono); font-size: 12.5px; color: var(--cyan); text-decoration: none; margin-right: 18px; }
+  .project-links a:hover{ text-decoration: underline; }
+
+  .shots-row{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 680px){ .shots-row{ grid-template-columns: 1fr; } }
+  .shot{ border: 1px solid var(--border-bright); overflow: hidden; background: #fff; }
+  .shot img{ display:block; width: 100%; height: auto; }
+  .shot-cap{ font-family: var(--font-mono); font-size: 10.5px; color: var(--text-dim); padding: 6px 8px; background: var(--bg-panel); border-top: 1px solid var(--border); }
+
+  .flagship-badge{
+    font-family: var(--font-mono); font-size: 10.5px; color: var(--amber);
+    border: 1px solid rgba(242,166,90,0.35); background: rgba(242,166,90,0.06);
+    padding: 2px 8px; margin-left: 10px;
+  }
+
+  /* ---------- experience / education timeline ---------- */
+  .timeline{ position: relative; padding-left: 28px; }
+  .timeline::before{ content:""; position:absolute; left: 4px; top: 6px; bottom: 6px; width: 1px; background: var(--border-bright); }
+  .tl-item{ position: relative; margin-bottom: 30px; }
+  .tl-item:last-child{ margin-bottom: 0; }
+  .tl-item::before{ content:""; position: absolute; left: -28px; top: 5px; width: 9px; height: 9px; border-radius:50%; background: var(--bg); border: 2px solid var(--cyan); }
+  .tl-period{ font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); margin-bottom: 4px; }
+  .tl-role{ font-weight: 600; margin-bottom: 4px; }
+  .tl-org{ color: var(--text-muted); font-size: 14px; margin-bottom: 8px; }
+  .tl-desc{ color: var(--text-muted); font-size: 14.5px; max-width: 62ch; margin: 0 0 6px 18px; }
+
+  .edu-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 44px; }
+  @media (max-width: 780px){ .edu-grid{ grid-template-columns: 1fr; } }
+  .subhead{ font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .cert-list{ display:flex; flex-direction:column; gap: 14px; }
+  .cert-item{ border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+  .cert-name{ font-size: 14px; font-weight: 600; }
+  .cert-meta{ font-family: var(--font-mono); font-size: 11.5px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ---------- contact ---------- */
+  .contact-panel{
+    padding: 36px;
+    display:grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items:center;
+  }
+  @media (max-width: 720px){ .contact-panel{ grid-template-columns: 1fr; } }
+  .status-line{ font-family: var(--font-mono); font-size: 12px; color: var(--cyan); display:flex; align-items:center; gap:8px; margin-bottom: 16px; }
+  .contact-panel h2{ margin-bottom: 14px; }
+  .contact-panel p{ color: var(--text-muted); max-width: 46ch; }
+  .contact-list{ display:flex; flex-direction:column; gap: 14px; }
+  .contact-list a{
+    font-family: var(--font-mono); font-size: 13.5px; text-decoration:none;
+    color: var(--text); border-bottom: 1px solid var(--border);
+    padding-bottom: 10px; display:flex; justify-content: space-between; gap: 10px;
+  }
+  .contact-list a:hover{ color: var(--cyan); border-color: var(--cyan); }
+  .contact-list a span:last-child{ color: var(--text-dim); text-align:right; word-break: break-all; }
+
+  footer{
+    padding: 26px 0 40px;
+    font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);
+    display:flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="nav-id"><span class="dot"></span> BIRUK GIRMA // PORTFOLIO</div>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">MENU</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow-tag">Seeking a junior developer or IT support role</div>
+        <h1>Biruk <span class="surname">Girma</span></h1>
+        <div class="hero-role">Junior Full-Stack Developer · IT Support Specialist</div>
+        <p class="hero-desc">Computer Science graduate who builds full-stack web applications — most recently a tutor marketplace with live booking, auth, and review flows — and keeps the systems underneath them running.</p>
+        <div class="hero-meta">
+          <span>Harar, Ethiopia</span>
+          <span>CGPA 3.59 / 4.00</span>
+          <span>github.com/Buravetran</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#projects">View projects</a>
+          <a class="btn btn-secondary" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <div class="panel hero-photo">
+          <span class="tick-tl"></span><span class="tick-tr"></span><span class="tick-bl"></span><span class="tick-br"></span>
+          <img src="photo.jpg" alt="Portrait of Biruk Girma">
+          <span class="hero-photo-tag">HARAR, ET</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <span class="section-tag">01 / ABOUT</span>
+        <h2>Background</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I graduated from Mekdela Amba University with a <strong>B.Sc. in Computer Science</strong> and a CGPA of 3.59/4.00, and spent my studies splitting time between full-stack web development, Android development, and hands-on IT support.</p>
+          <p>I've shipped production-style projects like a full-stack bus reservation platform and a personal finance tracker, and during a two-month IT internship I cut lab downtime by 30% through systematic diagnostics and proactive patch management. I like the mix — building software, and understanding the infrastructure it depends on.</p>
+        </div>
+        <div>
+          <div class="panel stat-panel"><span class="tick-tl"></span><span class="tick-tr"></span><span class="tick-bl"></span><span class="tick-br"></span>
+            <div class="stat-num">3.59 / 4.00</div>
+            <div class="stat-label">CGPA, B.Sc. Computer Science</div>
+          </div>
+          <div class="panel stat-panel"><span class="tick-tl"></span><span class="tick-tr"></span><span class="tick-bl"></span><span class="tick-br"></span>
+            <div class="stat-num">-30%</div>
+            <div class="stat-label">Lab downtime, IT internship</div>
+          </div>
+          <div class="panel stat-panel"><span class="tick-tl"></span><span class="tick-tr"></span><span class="tick-bl"></span><span class="tick-br"></span>
+            <div class="stat-num">Live</div>
+            <div class="stat-label">Full-stack app in production — Railway + Vercel</div>
+          </div>
+          <div class="panel quote-panel"><span class="tick-tl"></span><span class="tick-tr"></span><span class="tick-bl"></span><span class="tick-br"></span>
+            <p>"A student of exceptional talent, intellectual curiosity, and unwavering dedication... a natural communicator who excels in team settings."</p>
+            <div class="quote-attr">— Leweyehu Yirsaw, Head, Dept. of Computer Science, Mekdela Amba University</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head">
+        <span class="section-tag">02 / CAPABILITIES</span>
+        <h2>Skills by domain</h2>
+      </div>
+      <div class="domain-grid">
+        <div class="panel domain web"><span class="tick-tl"></span><span class="tick-tr"></span><span class="tick-bl"></span><span class="tick-br"></span>
+          <div class="domain-title">Frontend</div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>React &amp; Vite</span><span>INT</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:72%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>JavaScript (ES6+)</span><span>INT</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:75%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>HTML5, CSS3, Bootstrap</span><span>ADV</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:82%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Responsive design</span><span>ADV</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:80%"></div></div>
+          </div>
+        </div>
+
+        <div class="panel domain mobile"><span class="tick-tl"></span><span class="tick-tr"></span><span class="tick-bl"></span><span class="tick-br"></span>
+          <div class="domain-title">Backend &amp; APIs</div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Node.js &amp; Express</span><span>INT</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:70%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>REST API design</span><span>INT</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:68%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>JWT authentication</span><span>INT</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:66%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>PHP</span><span>INT</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:70%"></div></div>
+          </div>
+        </div>
+
+        <div class="panel domain itops"><span class="tick-tl"></span><span class="tick-tr"></span><span class="tick-bl"></span><span class="tick-br"></span>
+          <div class="domain-title">Databases, DevOps &amp; IT</div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>PostgreSQL / MySQL</span><span>INT</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:70%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Git &amp; GitHub</span><span>ADV</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:78%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Railway &amp; Vercel deployment</span><span>INT</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:65%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Hardware / network troubleshooting</span><span>ADV</span></div>
+            <div class="meter"><div class="meter-fill" style="--w:80%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tools-row">
+        <div class="tools-label">Tools &amp; software</div>
+        <div class="tool-tags">
+          <span class="tool-tag">Git &amp; GitHub</span>
+          <span class="tool-tag">VS Code</span>
+          <span class="tool-tag">Postman</span>
+          <span class="tool-tag">XAMPP</span>
+          <span class="tool-tag">Figma</span>
+          <span class="tool-tag">Chart.js</span>
+          <span class="tool-tag">Excel</span>
+          <span class="tool-tag">Microsoft Office</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-head">
+        <span class="section-tag">03 / PROJECTS</span>
+        <h2>Selected work</h2>
+      </div>
+
+      <details class="project" open>
+        <summary>
+          <span class="project-id">PROJ/01</span>
+          <span class="project-name">Tutor Marketplace<span class="flagship-badge">LIVE</span></span>
+          <span class="project-arrow">▸</span>
+        </summary>
+        <div class="project-body">
+          <p style="color: var(--text-muted); max-width: 68ch; margin-bottom: 14px;">A full-stack, two-sided marketplace connecting students with tutors — search by subject, request and manage sessions, and leave reviews once a session is complete. Built to push past my PHP/MySQL stack into a modern JavaScript stack, and deployed live rather than just run locally.</p>
+          <div class="shots-row">
+            <div class="shot"><img src="project-search.jpg" alt="Find a tutor search and listing screen"><div class="shot-cap">Search &amp; browse tutors by subject</div></div>
+            <div class="shot"><img src="project-booking.jpg" alt="Tutor profile with request a session form and reviews"><div class="shot-cap">Tutor profile &amp; session request</div></div>
+            <div class="shot"><img src="project-manage.jpg" alt="Tutor's bookings view with accept and decline actions"><div class="shot-cap">Tutor-side booking management</div></div>
+          </div>
+          <ul>
+            <li>Built a full-stack marketplace with role-based views for students and tutors, covering search, booking requests, and a full accept / decline / complete lifecycle.</li>
+            <li>Implemented secure JWT-based authentication and a REST API with Express, backed by a PostgreSQL database.</li>
+            <li>Built the frontend in React with Vite and React Router, using Axios to talk to the API.</li>
+            <li>Added a post-session ratings &amp; reviews system so students can rate tutors after a completed booking.</li>
+            <li>Deployed the backend to Railway and the frontend to Vercel, with both GitHub repos documented with live links and screenshots.</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-tag">Node.js</span><span class="stack-tag">Express</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">JWT</span><span class="stack-tag">React</span><span class="stack-tag">Vite</span><span class="stack-tag">React Router</span><span class="stack-tag">Axios</span><span class="stack-tag">Railway</span><span class="stack-tag">Vercel</span>
+          </div>
+          <div class="project-links">
+            <a href="https://tutor-marketplace-frontend.vercel.app" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/Buravetran/tutor-marketplace-frontend" target="_blank" rel="noopener">Frontend repo ↗</a>
+            <a href="https://github.com/Buravetran/tutor-marketplace-backend" target="_blank" rel="noopener">Backend repo ↗</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="project">
+        <summary>
+          <span class="project-id">PROJ/02</span>
+          <span class="project-name">Online Bus Reservation System</span>
+          <span class="project-arrow">▸</span>
+        </summary>
+        <div class="project-body">
+          <ul>
+            <li>Architected a full-stack booking platform with user authentication, seat selection, schedule management, and an admin dashboard.</li>
+            <li>Designed a normalized relational schema for bookings, routes, schedules, and users, eliminating data redundancy.</li>
+            <li>Built a responsive, mobile-friendly UI with real-time AJAX-driven seat availability updates.</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-tag">PHP</span><span class="stack-tag">MySQL</span><span class="stack-tag">JavaScript</span><span class="stack-tag">AJAX</span><span class="stack-tag">Bootstrap</span><span class="stack-tag">XAMPP</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Buravetran" target="_blank" rel="noopener">Source code ↗</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="project">
+        <summary>
+          <span class="project-id">PROJ/03</span>
+          <span class="project-name">Personal Finance Tracker</span>
+          <span class="project-arrow">▸</span>
+        </summary>
+        <div class="project-body">
+          <ul>
+            <li>Built a web app for logging income and expenses, setting budgets, and tracking spending across custom categories.</li>
+            <li>Integrated Chart.js for interactive visual breakdowns of financial activity over time.</li>
+            <li>Implemented secure user authentication ensuring complete data privacy per user.</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-tag">PHP</span><span class="stack-tag">MySQL</span><span class="stack-tag">JavaScript</span><span class="stack-tag">Chart.js</span><span class="stack-tag">Bootstrap</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Buravetran" target="_blank" rel="noopener">Source code ↗</a>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section id="experience">
+      <div class="section-head">
+        <span class="section-tag">04 / EXPERIENCE</span>
+        <h2>Where I've worked</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-period">Jul 2025 — Aug 2025</div>
+          <div class="tl-role">IT Support Intern</div>
+          <div class="tl-org">Horn International College — Harar, Ethiopia</div>
+          <div class="tl-desc">Diagnosed and resolved hardware and software issues across the computer lab, reducing downtime by 30% within the first weeks.</div>
+          <div class="tl-desc">Managed OS updates and security-patch rollouts on 20+ lab machines, keeping all systems current and compliant.</div>
+          <div class="tl-desc">Assisted staff and students with TCP/IP, DNS, and DHCP troubleshooting, improving first-response resolution times.</div>
+          <div class="tl-desc">Maintained accurate documentation of technical issues and resolutions for future reference.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="section-head">
+        <span class="section-tag">05 / EDUCATION</span>
+        <h2>Education &amp; certifications</h2>
+      </div>
+      <div class="edu-grid">
+        <div>
+          <div class="subhead">Degree</div>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-period">Graduated Feb 2026</div>
+              <div class="tl-role">B.Sc. Computer Science</div>
+              <div class="tl-org">Mekdela Amba University</div>
+              <div class="tl-desc">CGPA: 3.59 / 4.00 · National Exit Exam (EEUE): Passed with 73%</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="subhead">Certificates</div>
+          <div class="cert-list">
+            <div class="cert-item">
+              <div class="cert-name">Android Developer Fundamentals (Nanodegree)</div>
+              <div class="cert-meta">Udacity · Feb 2026</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-name">Data Analysis Fundamentals (Nanodegree)</div>
+              <div class="cert-meta">Udacity · Feb 2026</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-name">Analytics with Excel (DLS103)</div>
+              <div class="cert-meta">e-SHE / Arizona State University EdPlus · Jun 2026</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-name">Gig-101: Business, Legal &amp; Finance</div>
+              <div class="cert-meta">M-Academy Training, Mesirat Program · Nov 2024</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-name">Academic Integrity (CE105)</div>
+              <div class="cert-meta">e-SHE / Arizona State University EdPlus · Oct 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="panel contact-panel"><span class="tick-tl"></span><span class="tick-tr"></span><span class="tick-bl"></span><span class="tick-br"></span>
+        <div>
+          <div class="status-line"><span class="dot"></span> STATUS: OPEN TO JUNIOR DEV &amp; IT ROLES</div>
+          <h2>Let's talk</h2>
+          <p>Whether it's a web application to build, an Android app to prototype, or an IT system to keep running — I'd like to hear about it.</p>
+        </div>
+        <div class="contact-list">
+          <a href="mailto:burag1221@gmail.com">Email <span>burag1221@gmail.com</span></a>
+          <a href="tel:+251900203432">Phone <span>+251 900 203 432</span></a>
+          <a href="https://github.com/Buravetran" target="_blank" rel="noopener">GitHub <span>Buravetran</span></a>
+          <a href="https://linkedin.com/in/biruk-girma-410064342" target="_blank" rel="noopener">LinkedIn <span>biruk-girma</span></a>
+          <a href="resume.pdf" target="_blank" rel="noopener">Resume <span>Download PDF</span></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>© 2026 Biruk Girma</span>
+    <span>Harar, Ethiopia</span>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+    });
+  });
+
+  const details = document.querySelectorAll('.project');
+  details.forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) {
+        details.forEach(other => { if (other !== d) other.open = false; });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
